@@ -36,14 +36,11 @@
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(201,168,76,0.15);
   }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 400;
-    letter-spacing: 0.15em;
-    color: var(--gold);
+  .nav-logo img {
+    height: 44px;
+    width: auto;
+    display: block;
   }
-  .nav-logo span { color: var(--cream); }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
     font-size: 0.75rem;
@@ -77,8 +74,17 @@
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,168,76,0.07) 0%, transparent 70%),
-                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+    background: url('hero-bg.jpg') center 40% / cover no-repeat;
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(13,13,13,0.92) 0%,
+      rgba(13,13,13,0.80) 50%,
+      rgba(13,13,13,0.65) 100%
+    );
   }
   .hero-line {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -148,6 +154,10 @@
     transition: border-color 0.3s, background 0.3s;
   }
   .btn-ghost:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+  .hero-tag, .hero h1, .hero-sub, .hero-actions, .hero-geo {
+    position: relative;
+    z-index: 2;
+  }
   .hero-geo {
     position: absolute; bottom: 3rem; right: 4rem;
     font-size: 0.68rem;
@@ -168,6 +178,15 @@
     gap: 6rem;
     align-items: center;
     border-top: 1px solid rgba(201,168,76,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  .purpose::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url('purpose-bg.jpg') center center / cover no-repeat;
+    opacity: 0.08;
+    pointer-events: none;
   }
   .section-label {
     font-size: 0.65rem;
@@ -199,6 +218,61 @@
     font-style: italic;
     color: var(--cream);
     line-height: 1.6;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 8rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    border-top: 1px solid rgba(201,168,76,0.12);
+    background: #0a0a0a;
+  }
+  .about-img-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .about-img-wrap img {
+    width: 100%;
+    display: block;
+    filter: grayscale(15%);
+    transition: filter 0.5s;
+  }
+  .about-img-wrap:hover img { filter: grayscale(0%); }
+  .about-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(13,13,13,0.6) 100%);
+    pointer-events: none;
+  }
+  .about-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 0;
+  }
+  .about-title em { font-style: italic; color: var(--gold); }
+  .about-text {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: rgba(245,240,232,0.82);
+    margin-bottom: 1rem;
+  }
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.8rem;
+  }
+  .about-tags span {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(201,168,76,0.35);
+    color: var(--gold);
   }
 
   /* ── PILLARS ── */
@@ -306,6 +380,15 @@
     grid-template-columns: 1fr 1.4fr;
     gap: 6rem;
     align-items: start;
+    position: relative;
+    overflow: hidden;
+  }
+  .why::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url('why-bg.jpg') center 40% / cover no-repeat;
+    opacity: 0.10;
+    pointer-events: none;
   }
   .why-left h2 {
     font-family: 'Cormorant Garamond', serif;
@@ -395,7 +478,8 @@
   }
   .vision-bg {
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(201,168,76,0.05) 0%, transparent 70%);
+    background: url('vision-bg.jpg') center center / cover no-repeat;
+    opacity: 0.12;
     pointer-events: none;
   }
   .vision-inner { max-width: 700px; }
@@ -477,7 +561,8 @@
     align-items: center;
     justify-content: space-between;
   }
-  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 0.15em; }
+  .footer-logo img { height: 52px; width: auto; display: block; opacity: 0.92; transition: opacity 0.3s; }
+  .footer-logo img:hover { opacity: 1; }
   .footer-tagline { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,240,232,0.35); text-align: center; }
   .footer-links { display: flex; gap: 2rem; }
   .footer-links a { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,240,232,0.4); text-decoration: none; transition: color 0.3s; }
@@ -496,7 +581,7 @@
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
     .hero, .purpose, .why, .vision, .pillars, .geo, .cta { padding-left: 1.5rem; padding-right: 1.5rem; }
-    .purpose, .why { grid-template-columns: 1fr; gap: 3rem; }
+    .purpose, .why, .about { grid-template-columns: 1fr; gap: 3rem; }
     .pillars-grid { grid-template-columns: 1fr; }
     .why-stats { grid-template-columns: 1fr 1fr; }
     .geo-zones { flex-direction: column; }
@@ -509,7 +594,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">NOVA<span> BM</span></div>
+  <a href="#" class="nav-logo"><img src="NOVABM_full.png" alt="Nova BM"></a>
   <ul class="nav-links">
     <li><a href="#pillars">Services</a></li>
     <li><a href="#why">About</a></li>
@@ -551,6 +636,30 @@
   </div>
 </section>
 
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-image reveal">
+    <div class="about-img-wrap">
+      <img src="about-photo.jpg" alt="Alexandra Bugnon-Murys — Founder, Nova BM">
+      <div class="about-img-overlay"></div>
+    </div>
+  </div>
+  <div class="about-content reveal">
+    <p class="section-label">The Founder</p>
+    <h2 class="about-title">Alexandra<br><em>Bugnon-Murys</em></h2>
+    <div class="gold-rule"></div>
+    <p class="about-text">Franco-British senior leader with 20+ years of experience in the nuclear and energy industry, including major international programmes such as Hinkley Point C.</p>
+    <p class="about-text">Holder of an Oxford EMBA and recognised as a Franco-British Young Leader 2025, Alexandra brings a rare combination of deep operational expertise, cross-cultural intelligence, and genuine commitment to people-centred performance.</p>
+    <div class="about-tags">
+      <span>Oxford EMBA</span>
+      <span>Franco-British Young Leader 2025</span>
+      <span>Women in Nuclear — UK & France</span>
+      <span>20+ years · Nuclear & Energy</span>
+    </div>
+    <a href="https://www.linkedin.com/in/alexandra-bugnon-murys" target="_blank" class="pillar-link" style="margin-top:1.5rem">Connect on LinkedIn</a>
+  </div>
+</section>
+
 <!-- PILLARS -->
 <section class="pillars" id="pillars">
   <div class="section-header reveal">
@@ -574,6 +683,7 @@
         <li>Regulatory & compliance advisory</li>
       </ul>
       <a href="#contact" class="pillar-link">Learn more</a>
+      <img src="pillar1-bg.jpg" alt="Business Development" style="width:100%;margin-top:1.5rem;opacity:0.6;filter:grayscale(15%);object-fit:cover;height:200px;object-position:center 30%;">
     </div>
 
     <div class="pillar-card reveal">
@@ -590,6 +700,7 @@
         <li>On-the-ground deployment coaching</li>
       </ul>
       <a href="#contact" class="pillar-link">Learn more</a>
+      <img src="optimisation-photo.jpg" alt="Operational excellence" style="width:100%;margin-top:1.5rem;opacity:0.6;filter:grayscale(15%);object-fit:cover;height:200px;object-position:center center;">
     </div>
 
     <div class="pillar-card reveal">
@@ -606,7 +717,7 @@
         <li>Mentoring programme design</li>
       </ul>
       <a href="#contact" class="pillar-link">Learn more</a>
-    </div>
+      <img src="leadership-photo.jpg" alt="Leadership in action" style="width:100%;margin-top:1.5rem;opacity:0.6;filter:grayscale(20%);object-fit:cover;height:200px;object-position:center top;">
 
   </div>
 </section>
@@ -704,9 +815,9 @@
 <section class="cta" id="contact">
   <h2>Ready to transform<br><em>your organisation?</em></h2>
   <p>We are accepting first engagements and discovery conversations. Let us discuss how Nova BM can support your next step.</p>
-  <a href="mailto:alexandra@nova-bm.com" class="btn-dark">Start the Conversation</a>
+  <a href="/cdn-cgi/l/email-protection#1a7b767f627b747e687b5a74756c7b37787734797577" class="btn-dark">Start the Conversation</a>
   <p class="cta-contact">
-    <a href="mailto:alexandra@nova-bm.com">alexandra@nova-bm.com</a>
+    <a href="/cdn-cgi/l/email-protection#72131e170a131c160013321c1d04135f101f5c111d1f"><span class="__cf_email__" data-cfemail="1978757c6178777d6b785977766f78347b74377a7674">[email&#160;protected]</span></a>
     &nbsp;·&nbsp; +44 (0)7 405 738 435
     &nbsp;·&nbsp; +33 (0)6 77 66 40 17
   </p>
@@ -714,26 +825,14 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">NOVA BM</div>
+  <div class="footer-logo"><img src="NOVABM_full.png" alt="Nova BM"></div>
   <div class="footer-tagline">Empowering Leaders · Transforming Energy · Amplifying Impact</div>
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/alexandra-bugnon-murys" target="_blank">LinkedIn</a>
-    <a href="mailto:alexandra@nova-bm.com">Contact</a>
+    <a href="/cdn-cgi/l/email-protection#f1909d9489909f958390b19f9e8790dc939cdf929e9c">Contact</a>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(el => observer.observe(el));
-</script>
-
-</body>
-</html>
